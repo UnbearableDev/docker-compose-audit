@@ -3,7 +3,7 @@
 	"actorSpecification": 1,
 	"name": "docker-compose-audit",
 	"title": "Docker Compose Security Audit",
-	"description": "MCP server that audits docker-compose.yml files for security misconfigurations. Trivy-grade catalog (50+ checks roadmapped, ~12 live in v1), MCP-native interface designed for AI agents — every finding ships with a severity rating, full remediation text, and a YAML fix snippet you can paste. Single umbrella tool (audit_compose) plus per-category tools (check_privilege, check_network, etc.). Built by Unbearable TechTips.",
+	"description": "Audits docker-compose.yml files for security misconfigurations. 25 checks across 9 categories with severity, remediation, and YAML fix snippets. Pay-per-event. MCP-native — call from Claude Desktop, Cursor, n8n, or any MCP client. Built by Unbearable TechTips.",
 	"version": "0.1",
 	"buildTag": "latest",
 	"usesStandbyMode": true,
