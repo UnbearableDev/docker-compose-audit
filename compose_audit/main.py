@@ -180,7 +180,52 @@ def get_server() -> FastMCP:
     return server
 
 
-# ── Session middleware (verbatim from python-mcp-empty template) ─────────────
+# ── Landing page (for browser visits to /) ──────────────────────────────────
+
+LANDING_HTML = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Docker Compose Security Audit — MCP server</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+         max-width: 680px; margin: 60px auto; padding: 0 24px; line-height: 1.55;
+         color: #1a1a1a; background: #fafafa; }
+  h1 { font-size: 1.4rem; margin: 0 0 .25rem 0; }
+  .sub { color: #666; margin: 0 0 2rem 0; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+              background: #efefef; padding: 2px 6px; border-radius: 3px; font-size: .9rem; }
+  pre { padding: 12px; overflow-x: auto; }
+  a { color: #0366d6; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  footer { margin-top: 3rem; font-size: .85rem; color: #888; }
+  ul { padding-left: 1.2rem; }
+  li { margin: .35rem 0; }
+</style>
+</head>
+<body>
+<h1>Docker Compose Security Audit — MCP server</h1>
+<p class="sub">This is a Model Context Protocol endpoint, not a website.</p>
+
+<p>Point your MCP client at the <code>/mcp</code> path on this host:</p>
+<pre>POST /mcp     (with Streamable HTTP transport)</pre>
+
+<p>11 tools are available, including <code>audit_compose</code>, per-category checks (<code>check_privilege</code>, <code>check_network</code>, etc.), and <code>list_checks</code>. Every finding includes severity, remediation text, and a YAML fix snippet.</p>
+
+<p><strong>Quick links:</strong></p>
+<ul>
+  <li><a href="https://apify.com/unbearable_dev/docker-compose-audit">Apify Store listing</a> — description, pricing, "Try for free"</li>
+  <li><a href="https://modelcontextprotocol.io/clients">MCP client list</a> — Claude Desktop, Cursor, Continue, etc.</li>
+</ul>
+
+<footer>Built by Unbearable TechTips.</footer>
+</body>
+</html>
+""".encode('utf-8')
+
+
+# ── Session middleware (extended with landing-page handler) ─────────────────
 
 def get_session_id(headers: Mapping[str, str]) -> str | None:
     """Extract session ID from request headers."""
@@ -254,6 +299,27 @@ class SessionTrackingMiddleware:
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         path = scope.get('path', '')
+
+        # Friendly landing page for browser visits to the bare URL
+        if (
+            scope.get('type') == 'http'
+            and scope.get('method') == 'GET'
+            and path in ('', '/')
+        ):
+            await send({
+                'type': 'http.response.start',
+                'status': 200,
+                'headers': [
+                    (b'content-type', b'text/html; charset=utf-8'),
+                    (b'cache-control', b'public, max-age=3600'),
+                ],
+            })
+            await send({
+                'type': 'http.response.body',
+                'body': LANDING_HTML,
+            })
+            return
+
         if scope.get('type') != 'http' or path not in ('/mcp', '/mcp/'):
             await self.app(scope, receive, send)
             return
