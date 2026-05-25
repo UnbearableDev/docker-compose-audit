@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+      - "22:22"
+    privileged: true
+    environment:
+      DB_PASSWORD: "supersecret123"
+      API_TOKEN: "ghp_actualtoken123abc"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc:/host-etc:ro
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: hardcoded-not-a-ref
+    cap_add:
+      - SYS_ADMIN
+      - NET_ADMIN
+    network_mode: host
+
+  cache:
+    image: redis:latest
+    ports:
+      - "6379:6379"

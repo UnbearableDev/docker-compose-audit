@@ -1,0 +1,24 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "docker-compose-audit",
+	"title": "Docker Compose Security Audit",
+	"description": "MCP server that audits docker-compose.yml files for security misconfigurations. Trivy-grade catalog (50+ checks roadmapped, ~12 live in v1), MCP-native interface designed for AI agents — every finding ships with a severity rating, full remediation text, and a YAML fix snippet you can paste. Single umbrella tool (audit_compose) plus per-category tools (check_privilege, check_network, etc.). Built by Unbearable TechTips.",
+	"version": "0.1",
+	"buildTag": "latest",
+	"usesStandbyMode": true,
+	"meta": {
+		"templateId": "python-mcp-empty",
+		"generatedBy": "Claude Code with Claude Opus 4.7"
+	},
+	"input": {
+		"title": "Actor input schema",
+		"description": "MCP server runs in Standby mode — input is supplied via MCP tool calls, not Actor input.",
+		"type": "object",
+		"schemaVersion": 1,
+		"properties": {},
+		"required": []
+	},
+	"dockerfile": "../Dockerfile",
+	"webServerMcpPath": "/mcp"
+}

@@ -1,0 +1,12 @@
+{
+    "audit-call": {
+        "eventTitle": "Docker Compose audit call",
+        "eventDescription": "Charged once per audit_compose or check_<category> tool call. Returns findings with severity, remediation, and fix snippets.",
+        "eventPriceUsd": 0.02
+    },
+    "list-checks": {
+        "eventTitle": "List available checks",
+        "eventDescription": "Charged for discovery calls to list_checks. Returns the full check catalog with IDs, categories, severities, and titles.",
+        "eventPriceUsd": 0.005
+    }
+}
