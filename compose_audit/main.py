@@ -103,39 +103,49 @@ def get_server() -> FastMCP:
 
     @server.tool()
     async def audit_compose(
-        compose_yaml: str | None = None,
+        compose_content: str | None = None,
         compose_url: str | None = None,
         min_severity: Severity = DEFAULT_MIN_SEVERITY,
+        compose_yaml: str | None = None,
     ) -> dict[str, Any]:
         """Run the full security audit against a docker-compose.yml.
 
-        Provide exactly one of `compose_yaml` (paste the YAML) or `compose_url`
+        Provide exactly one of `compose_content` (paste the YAML) or `compose_url`
         (public HTTPS URL — e.g. a GitHub raw URL). Returns findings grouped by
         category, each with severity, description, remediation, and a YAML fix snippet.
 
         Args:
-            compose_yaml: The docker-compose.yml content as a string.
+            compose_content: The docker-compose.yml content as a string (primary param).
             compose_url: HTTPS URL to fetch the compose file from (5s timeout, 1MB cap).
             min_severity: Drop findings below this severity. One of: 'info', 'low', 'medium', 'high'. Defaults to 'low'.
+            compose_yaml: Deprecated alias for compose_content. Accepted for one release cycle.
         """
-        return await _run_audit(compose_yaml, compose_url, min_severity, category=None)
+        if compose_content and compose_yaml:
+            return _error_response('Provide compose_content or compose_yaml (alias), not both.')
+        resolved_content = compose_content or compose_yaml
+        return await _run_audit(resolved_content, compose_url, min_severity, category=None)
 
     # Generate per-category tools dynamically — same signature as audit_compose
     # but pinned to a specific category.
     def _make_category_tool(category: str):
         async def _tool(
-            compose_yaml: str | None = None,
+            compose_content: str | None = None,
             compose_url: str | None = None,
             min_severity: Severity = DEFAULT_MIN_SEVERITY,
+            compose_yaml: str | None = None,
         ) -> dict[str, Any]:
-            return await _run_audit(compose_yaml, compose_url, min_severity, category=category)
+            if compose_content and compose_yaml:
+                return _error_response('Provide compose_content or compose_yaml (alias), not both.')
+            resolved_content = compose_content or compose_yaml
+            return await _run_audit(resolved_content, compose_url, min_severity, category=category)
 
         _tool.__name__ = f'check_{category}'
         _tool.__doc__ = (
             f"Run only the {category} checks against a docker-compose.yml.\n\n"
             f"Args:\n"
-            f"    compose_yaml: The docker-compose.yml content as a string.\n"
+            f"    compose_content: The docker-compose.yml content as a string (primary param).\n"
             f"    compose_url: HTTPS URL to fetch from (5s timeout, 1MB cap).\n"
+            f"    compose_yaml: Deprecated alias for compose_content.\n"
             f"    min_severity: Drop findings below this severity. Defaults to 'low'."
         )
         return _tool
