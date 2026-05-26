@@ -28,6 +28,11 @@ def check_latest_tag(doc: ComposeDoc) -> Iterable[Finding]:
             tag = None
 
         if tag is None or tag == 'latest':
+            # Derive base (no tag) for the fix snippet — strip the existing tag if present
+            if tag is not None:
+                base = image_no_digest.rsplit(':', 1)[0]
+            else:
+                base = image_no_digest
             yield Finding(
                 id='DCS-037',
                 category=CATEGORY,
@@ -44,7 +49,7 @@ def check_latest_tag(doc: ComposeDoc) -> Iterable[Finding]:
                     "Pin to a specific version tag. For maximum reproducibility and supply-chain "
                     "safety, pin to a SHA256 digest."
                 ),
-                fix_yaml_snippet=f'    image: {image_no_digest}:<specific-version>',
+                fix_yaml_snippet=f'    image: {base}:<specific-version>',
                 references=['CIS-Docker-4.6'],
             )
 

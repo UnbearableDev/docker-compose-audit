@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  latest_plain:
+    image: nginx:latest
+
+  no_tag:
+    image: nginx
+
+  registry_latest:
+    image: gcr.io/distroless/python:latest
+
+  registry_port_latest:
+    image: localhost:5000/foo:latest
