@@ -11,6 +11,7 @@ metadata:
   tags: [docker, docker-compose, security, audit, devops, ci-cd, linter, static-analysis, mcp]
   license: MIT
   publisher: unbearabledev
+  icon: icon.svg
   homepage: https://github.com/UnbearableDev/docker-compose-audit
 workflow_prompts:
   - name: audit_compose_local
