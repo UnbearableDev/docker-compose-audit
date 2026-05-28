@@ -3,7 +3,7 @@
 	"actorSpecification": 1,
 	"name": "docker-compose-audit",
 	"title": "Docker Compose Security Audit",
-	"description": "Audits docker-compose.yml files for security misconfigurations. 25 checks across 9 categories with severity, remediation, and YAML fix snippets. Pay-per-event. MCP-native \u2014 call from Claude Desktop, Cursor, n8n, or any MCP client. Built by Unbearable TechTips.",
+	"description": "Audits docker-compose.yml files for security misconfigurations. 25 checks across 9 categories with severity, remediation, and YAML fix snippets. Pay-per-event. MCP-native — call from Claude Desktop, Cursor, n8n, or any MCP client. Built by Unbearable TechTips.",
 	"version": "0.2",
 	"buildTag": "latest",
 	"usesStandbyMode": true,
@@ -13,12 +13,16 @@
 	},
 	"input": {
 		"title": "Actor input schema",
-		"description": "MCP server runs in Standby mode \u2014 input is supplied via MCP tool calls, not Actor input.",
+		"description": "MCP server runs in Standby mode — input is supplied via MCP tool calls, not Actor input.",
 		"type": "object",
 		"schemaVersion": 1,
 		"properties": {},
 		"required": []
 	},
 	"dockerfile": "../Dockerfile",
-	"webServerMcpPath": "/mcp"
+	"webServerMcpPath": "/mcp",
+	"categories": [
+		"DEVELOPER_TOOLS",
+		"SECURITY"
+	]
 }

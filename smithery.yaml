@@ -12,3 +12,13 @@ metadata:
   license: MIT
   publisher: unbearabledev
   homepage: https://github.com/UnbearableDev/docker-compose-audit
+workflow_prompts:
+  - name: audit_compose_local
+    description: Full security audit of a docker-compose.yml pasted as text. Returns 25 checks across 9 categories with remediation and fix snippets.
+    prompt: Audit my docker-compose.yml for security misconfigurations. Here is the content: <paste YAML here>
+  - name: audit_compose_url
+    description: Full security audit fetched from a public HTTPS URL (e.g. GitHub raw). Same output as the local variant.
+    prompt: Audit the docker-compose.yml at this GitHub raw URL for security issues: https://raw.githubusercontent.com/<owner>/<repo>/main/docker-compose.yml
+  - name: list_checks
+    description: Browse the full check catalog or filter by category. Useful to understand what the Actor covers before running an audit.
+    prompt: What categories of checks does the docker-compose-audit MCP support? List all available checks.

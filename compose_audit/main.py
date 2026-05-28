@@ -36,6 +36,13 @@ _ANNOTATIONS = {
     'readOnlyHint': True,
     'destructiveHint': False,
     'idempotentHint': True,
+    'openWorldHint': True,
+}
+
+_ANNOTATIONS_LOCAL = {
+    'readOnlyHint': True,
+    'destructiveHint': False,
+    'idempotentHint': True,
     'openWorldHint': False,
 }
 
@@ -161,7 +168,7 @@ def get_server() -> FastMCP:
         tool_fn = _make_category_tool(category)
         server.tool(annotations=_ANNOTATIONS)(tool_fn)
 
-    @server.tool(annotations=_ANNOTATIONS)
+    @server.tool(annotations=_ANNOTATIONS_LOCAL)
     async def list_checks(category: str | None = None) -> dict[str, Any]:
         """List the full catalog of available checks.
 
