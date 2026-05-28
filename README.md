@@ -2,7 +2,7 @@
 
 > MCP server that audits `docker-compose.yml` files for security misconfigurations. Trivy-grade check catalog, designed for AI agents — every finding ships with a severity rating, full remediation text, and a YAML fix snippet you can paste.
 
-**Built by [Unbearable TechTips](https://github.com/UnbearableDev). Pay-per-event pricing — you only pay when an audit runs.**
+**Built by [Unbearable Labs](https://github.com/UnbearableDev). Pay-per-event pricing — you only pay when an audit runs.**
 
 ---
 
@@ -137,4 +137,4 @@ The next 29 checks on the v1.x → v2 roadmap include build-context security, ad
 
 Issues, ideas, or false-positive reports: open an issue on the [GitHub repo](https://github.com/UnbearableDev) or email `unbearabledev@gmail.com`.
 
-Get more like this in the [Unbearable TechTips newsletter](https://unbearabletechtips.beehiiv.com).
+get the weekly newsletter(https://unbearabletechtips.beehiiv.com).
