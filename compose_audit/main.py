@@ -32,6 +32,13 @@ from compose_audit.parser import ComposeInputError, resolve_compose_input
 Severity = Literal['high', 'medium', 'low', 'info']
 DEFAULT_MIN_SEVERITY: Severity = 'low'
 
+_ANNOTATIONS = {
+    'readOnlyHint': True,
+    'destructiveHint': False,
+    'idempotentHint': True,
+    'openWorldHint': False,
+}
+
 
 def _findings_to_response(findings: list[Finding], doc: ComposeDoc, summary_label: str) -> dict[str, Any]:
     """Build the standard audit response envelope."""
@@ -101,7 +108,7 @@ def get_server() -> FastMCP:
         )
         return _findings_to_response(findings, doc, label)
 
-    @server.tool()
+    @server.tool(annotations=_ANNOTATIONS)
     async def audit_compose(
         compose_content: str | None = None,
         compose_url: str | None = None,
@@ -152,9 +159,9 @@ def get_server() -> FastMCP:
 
     for category in check_registry.ALL_CATEGORIES:
         tool_fn = _make_category_tool(category)
-        server.tool()(tool_fn)
+        server.tool(annotations=_ANNOTATIONS)(tool_fn)
 
-    @server.tool()
+    @server.tool(annotations=_ANNOTATIONS)
     async def list_checks(category: str | None = None) -> dict[str, Any]:
         """List the full catalog of available checks.
 
