@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- docker-compose-audit: N3 highlighted (top-right), accent #3B82F6 (node-active) -->
+  <rect width="200" height="200" rx="31" fill="#0F172A"/>
+  <!-- Edges: all from N2(100,100) — inactive in #475569 1.5px stroke, active edge N2→N3 in #06B6D4 -->
+  <line x1="100" y1="100" x2="56" y2="56" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="144" y2="63" stroke="#06B6D4" stroke-width="6" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="69" y2="150" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="150" y2="144" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+  <!-- N1 inactive (56,56) -->
+  <circle cx="56" cy="56" r="13" fill="#F8FAFC"/>
+  <!-- N2 center inactive (100,100) -->
+  <circle cx="100" cy="100" r="13" fill="#F8FAFC"/>
+  <!-- N3 highlighted (144,63): r=16, accent fill, ink inner ring -->
+  <circle cx="144" cy="63" r="16" fill="#3B82F6"/>
+  <circle cx="144" cy="63" r="7" fill="#0F172A"/>
+  <!-- N4 inactive (69,150) -->
+  <circle cx="69" cy="150" r="13" fill="#F8FAFC"/>
+  <!-- N5 inactive (150,144) -->
+  <circle cx="150" cy="144" r="13" fill="#F8FAFC"/>
+  <!-- Stacked container rings: two small rectangles bottom-center suggesting docker-compose layers -->
+  <rect x="72" y="136" width="56" height="9" rx="3" fill="none" stroke="#3B82F6" stroke-width="3" opacity="0.5"/>
+  <rect x="72" y="150" width="56" height="9" rx="3" fill="none" stroke="#3B82F6" stroke-width="3" opacity="0.5"/>
+</svg>
