@@ -15,7 +15,7 @@
 - Smithery — *pending submission*
 - Glama — *pending submission*
 
-**Newsletter:** [Unbearable TechTips Weekly](https://unbearabletechtips.com) · **All Actors:** [github.com/UnbearableDev](https://github.com/UnbearableDev)
+**Newsletter:** [Unbearable TechTips Weekly](https://unbearabletechtips.beehiiv.com) · **All Actors:** [github.com/UnbearableDev](https://github.com/UnbearableDev)
 
 ## What it does
 
@@ -137,4 +137,4 @@ The next 29 checks on the v1.x → v2 roadmap include build-context security, ad
 
 Issues, ideas, or false-positive reports: open an issue on the [GitHub repo](https://github.com/UnbearableDev) or email `unbearabledev@gmail.com`.
 
-Get more like this in the [Unbearable TechTips newsletter](https://github.com/UnbearableDev) (launching soon).
+Get more like this in the [Unbearable TechTips newsletter](https://unbearabletechtips.beehiiv.com).
